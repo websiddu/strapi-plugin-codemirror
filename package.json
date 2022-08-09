@@ -1,12 +1,12 @@
 {
-  "name": "codemirror",
+  "name": "strapi-plugin-codemirror",
   "version": "0.0.0",
   "description": "This is the description of the plugin.",
   "strapi": {
-    "name": "codemirror",
+    "name": "strapi-plugin-codemirror",
     "description": "Description of Codemirror plugin",
     "kind": "plugin",
-    "displayName": "Codemirror"
+    "displayName": "Strapi Codemirror"
   },
   "dependencies": {
     "@codemirror/lang-markdown": "^6.0.1",
