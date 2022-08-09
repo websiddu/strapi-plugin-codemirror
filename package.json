@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "This is the description of the plugin.",
   "strapi": {
-    "name": "strapi-plugin-codemirror",
+    "name": "codemirror",
     "description": "Description of Codemirror plugin",
     "kind": "plugin",
     "displayName": "Strapi Codemirror"
