@@ -10,6 +10,8 @@ import { Box } from "@strapi/design-system/Box";
 import { Typography } from "@strapi/design-system/Typography";
 import { useIntl } from "react-intl";
 
+import MediaLib from "../MediaLib";
+
 const Wrapper = styled("div")`
   border: solid 1px #eee;
   border-radius: 4px;
@@ -29,6 +31,27 @@ const Editor = ({
 }) => {
   const { formatMessage } = useIntl();
 
+  const [mediaLibVisible, setMediaLibVisible] = useState(false);
+
+  const handleToggleMediaLib = () => setMediaLibVisible((prev) => !prev);
+
+  const handleChangeAssets = (assets) => {
+    // let newValue = value ? value : "";
+
+    // assets.map((asset) => {
+    //   if (asset.mime.includes("image")) {
+    //     const imgTag = `<p><img src="${asset.url}" alt="${asset.alt}"></img></p>`;
+
+    //     newValue = `${newValue}${imgTag}`;
+    //   }
+
+    //   // Handle videos and other type of files by adding some code
+    // });
+
+    // onChange({ target: { name, value: newValue } });
+    handleToggleMediaLib();
+  };
+
   return (
     <Stack size={1}>
       <Box>
@@ -43,6 +66,11 @@ const Editor = ({
       </Box>
       <Wrapper>
         <GlobalStyles></GlobalStyles>
+        <MediaLib
+          isOpen={mediaLibVisible}
+          onChange={handleChangeAssets}
+          onToggle={handleToggleMediaLib}
+        />
         <CodeMirror
           value={value}
           height={800}
