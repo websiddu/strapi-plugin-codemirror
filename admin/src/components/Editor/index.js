@@ -14,7 +14,7 @@ import Landscape from "@strapi/icons/Landscape";
 
 import MediaLib from "../MediaLib";
 
-const Wrapper = styled("div")`
+const CodeWrapper = styled("div")`
   border: solid 1px #eee;
   border-radius: 4px;
   overflow: hidden;
@@ -38,19 +38,18 @@ const Editor = ({
   const handleToggleMediaLib = () => setMediaLibVisible((prev) => !prev);
 
   const handleChangeAssets = (assets) => {
-    // let newValue = value ? value : "";
+    let newValue = value ? value : "";
 
-    // assets.map((asset) => {
-    //   if (asset.mime.includes("image")) {
-    //     const imgTag = `<p><img src="${asset.url}" alt="${asset.alt}"></img></p>`;
+    assets.map((asset) => {
+      if (asset.mime.includes("image")) {
+        const imgTag = `<p><img src="${asset.url}" alt="${asset.alt}"></img></p>`;
+        newValue = `${newValue}${imgTag}`;
+      }
 
-    //     newValue = `${newValue}${imgTag}`;
-    //   }
+      // Handle videos and other type of files by adding some code
+    });
 
-    //   // Handle videos and other type of files by adding some code
-    // });
-
-    // onChange({ target: { name, value: newValue } });
+    onChange({ target: { name, value: newValue } });
     handleToggleMediaLib();
   };
 
@@ -66,7 +65,7 @@ const Editor = ({
           </Typography>
         )}
       </Box>
-      <Wrapper>
+      <Box>
         <GlobalStyles></GlobalStyles>
         <Button
           startIcon={<Landscape />}
@@ -76,15 +75,18 @@ const Editor = ({
         >
           Media library
         </Button>
-        <CodeMirror
-          value={value}
-          height={800}
-          extensions={[markdown({ base: markdownLanguage })]}
-          onChange={(value) => {
-            onChange({ target: { name, value } });
-          }}
-        />
-      </Wrapper>
+        <Box style={{ height: 12 }}></Box>
+        <CodeWrapper>
+          <CodeMirror
+            value={value}
+            height={800}
+            extensions={[markdown({ base: markdownLanguage })]}
+            onChange={(value) => {
+              onChange({ target: { name, value } });
+            }}
+          />
+        </CodeWrapper>
+      </Box>
       {error && (
         <Typography variant="pi" textColor="danger600">
           {formatMessage({ id: error, defaultMessage: error })}
