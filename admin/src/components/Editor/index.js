@@ -55,7 +55,6 @@ const Editor = ({
   };
 
   function insertTextAtCursor(text) {
-    console.log("insert here...");
     let range = cm.current?.state?.selection?.ranges[0] || { from: 0, to: 0 };
     let transaction = cm.current.state.update({
       changes: {
@@ -65,7 +64,7 @@ const Editor = ({
       },
     });
 
-    return transaction;
+    return transaction.state.doc.toString();
   }
 
   return (
