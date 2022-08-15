@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import GlobalStyles from "./styles";
 import styled from "styled-components";
 
@@ -66,11 +66,14 @@ const Editor = ({
       </Box>
       <Wrapper>
         <GlobalStyles></GlobalStyles>
-        <MediaLib
-          isOpen={mediaLibVisible}
-          onChange={handleChangeAssets}
-          onToggle={handleToggleMediaLib}
-        />
+        <Button
+          startIcon={<Landscape />}
+          variant="secondary"
+          fullWidth
+          onClick={handleToggleMediaLib}
+        >
+          Media library
+        </Button>
         <CodeMirror
           value={value}
           height={800}
@@ -88,6 +91,12 @@ const Editor = ({
       {description && (
         <Typography variant="pi">{formatMessage(description)}</Typography>
       )}
+
+      <MediaLib
+        isOpen={mediaLibVisible}
+        onChange={handleChangeAssets}
+        onToggle={handleToggleMediaLib}
+      />
     </Stack>
   );
 };
