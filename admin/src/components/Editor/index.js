@@ -55,7 +55,7 @@ const Editor = ({
   };
 
   function insertTextAtCursor(text) {
-    let { state, view } = cm;
+    let { state, view } = cm.current;
     if (!state || !view) return;
 
     const main = view.state.selection.main;
