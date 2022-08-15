@@ -4,11 +4,13 @@ import styled from "styled-components";
 
 import CodeMirror from "@uiw/react-codemirror";
 import { markdown, markdownLanguage } from "@codemirror/lang-markdown";
+import { useIntl } from "react-intl";
 
 import { Stack } from "@strapi/design-system/Stack";
+import { Button } from "@strapi/design-system/Button";
 import { Box } from "@strapi/design-system/Box";
 import { Typography } from "@strapi/design-system/Typography";
-import { useIntl } from "react-intl";
+import Landscape from "@strapi/icons/Landscape";
 
 import MediaLib from "../MediaLib";
 
