@@ -32,6 +32,7 @@ const Editor = ({
   required,
 }) => {
   const { formatMessage } = useIntl();
+  const cm = useRef();
 
   const [mediaLibVisible, setMediaLibVisible] = useState(false);
 
@@ -40,18 +41,31 @@ const Editor = ({
   const handleChangeAssets = (assets) => {
     let newValue = value ? value : "";
 
+    let imgTag = "";
+
     assets.map((asset) => {
       if (asset.mime.includes("image")) {
-        const imgTag = `<p><img src="${asset.url}" alt="${asset.alt}"></img></p>`;
-        newValue = `${newValue}${imgTag}`;
+        imgTag = `<img src="${asset.url}" alt="${asset.alt}"></img>`;
       }
-
-      // Handle videos and other type of files by adding some code
     });
 
-    onChange({ target: { name, value: newValue } });
+    // onChange({ target: { name, value: newValue } });
+
+    insertTextAtCursor(imgTag);
+
     handleToggleMediaLib();
   };
+
+  function insertTextAtCursor(text) {
+    let range = cm.current?.state?.selection?.ranges[0] || { from: 0, to: 0 };
+    cm.current.state.update({
+      changes: {
+        from: range.from,
+        to: range.to,
+        inset: text,
+      },
+    });
+  }
 
   return (
     <Stack size={1}>
@@ -78,6 +92,7 @@ const Editor = ({
         <Box style={{ height: 12 }}></Box>
         <CodeWrapper>
           <CodeMirror
+            ref={cm}
             value={value}
             height={800}
             extensions={[markdown({ base: markdownLanguage })]}
