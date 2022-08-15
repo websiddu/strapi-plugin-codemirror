@@ -49,22 +49,23 @@ const Editor = ({
       }
     });
 
-    // onChange({ target: { name, value: newValue } });
-
-    insertTextAtCursor(imgTag);
-
+    newValue = insertTextAtCursor(imgTag);
+    onChange({ target: { name, value: newValue } });
     handleToggleMediaLib();
   };
 
   function insertTextAtCursor(text) {
+    console.log("insert here...");
     let range = cm.current?.state?.selection?.ranges[0] || { from: 0, to: 0 };
-    cm.current.state.update({
+    let transaction = cm.current.state.update({
       changes: {
         from: range.from,
         to: range.to,
         inset: text,
       },
     });
+
+    return transaction;
   }
 
   return (
