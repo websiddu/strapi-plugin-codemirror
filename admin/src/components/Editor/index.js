@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import GlobalStyles from "./styles";
 import styled from "styled-components";
 
+import { EditorSelection } from "@codemirror/state";
+
 import CodeMirror from "@uiw/react-codemirror";
 import { markdown, markdownLanguage } from "@codemirror/lang-markdown";
 import { useIntl } from "react-intl";
@@ -39,8 +41,6 @@ const Editor = ({
   const handleToggleMediaLib = () => setMediaLibVisible((prev) => !prev);
 
   const handleChangeAssets = (assets) => {
-    let newValue = value ? value : "";
-
     let imgTag = "";
 
     assets.map((asset) => {
