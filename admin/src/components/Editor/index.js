@@ -45,7 +45,7 @@ const Editor = ({
 
     assets.map((asset) => {
       if (asset.mime.includes("image")) {
-        imgTag = `<img src="${asset.url}" alt="${asset.alt}"></img>`;
+        imgTag = `![${asset.alt}](${asset.url}`;
       }
     });
 
@@ -71,7 +71,6 @@ const Editor = ({
         insert: text,
       },
       selection: EditorSelection.range(main.from + 4, main.to + 4),
-      // selection: { anchor: main.from + 4 },
     });
   }
 
