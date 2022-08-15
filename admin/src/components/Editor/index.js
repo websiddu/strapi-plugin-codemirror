@@ -49,22 +49,30 @@ const Editor = ({
       }
     });
 
-    newValue = insertTextAtCursor(imgTag);
-    onChange({ target: { name, value: newValue } });
+    insertTextAtCursor(imgTag);
+
     handleToggleMediaLib();
   };
 
   function insertTextAtCursor(text) {
-    let range = cm.current?.state?.selection?.ranges[0] || { from: 0, to: 0 };
-    let transaction = cm.current.state.update({
-      changes: {
-        from: range.from,
-        to: range.to,
-        inset: text,
-      },
-    });
+    let { state, view } = cm;
+    if (!state || !view) return;
 
-    return transaction.state.doc.toString();
+    const main = view.state.selection.main;
+    const txt = view.state.sliceDoc(
+      view.state.selection.main.from,
+      view.state.selection.main.to
+    );
+
+    view.dispatch({
+      changes: {
+        from: main.from,
+        to: main.to,
+        insert: text,
+      },
+      selection: EditorSelection.range(main.from + 4, main.to + 4),
+      // selection: { anchor: main.from + 4 },
+    });
   }
 
   return (
