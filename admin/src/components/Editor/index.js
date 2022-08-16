@@ -45,7 +45,7 @@ const Editor = ({
 
     assets.map((asset) => {
       if (asset.mime.includes("image")) {
-        imgTag = `![${asset.alt}](${asset.url}`;
+        imgTag = `![${asset.alt}](${asset.url})`;
       }
     });
 
